@@ -93,4 +93,29 @@ java_binary(
 )
 ```
 
-Although this works, it is sub-optimal since `IntMultiplier` can easily be reused in other places. It is locked into the `HelloWorld` binary as of now.
+Although this works, it is sub-optimal since `IntMultiplier` it is not specific to the `HelloWorld` binary and it can easily be reused in other places. It is locked into the `HelloWorld` binary as of now.
+
+If other targets want to use `IntMultiplier`, then they'll also have to add it as a source which wouldn't look clean. It makes more sense to add it into a general library.  
+
+For the second case, we will create a separate dependency. We will introduce a new type of build target, `java_library`. This target is meant to contain some shared collection of Java functionality. With the `java_library`, other build targets will be able to depend on it. 
+
+Let's define the library:
+```
+java_library(
+       name = "LibraryExample",
+       srcs = ["IntMultiplier.java"],
+)
+```
+
+Now, we can make the `HelloWorld` binary target depend on the `LibraryExample` library target we created:
+```
+java_binary(
+      name = "HelloWorld",
+      srcs = [
+           "HelloWorld.java",
+      ],
+      deps = [
+          ":LibraryExample",
+      ]
+)
+```

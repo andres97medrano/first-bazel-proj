@@ -2,6 +2,13 @@ java_binary(
       name = "HelloWorld",
       srcs = [
            "HelloWorld.java",
-           "IntMultiplier.java",
       ],
+      deps = [
+          ":LibraryExample",
+      ]
+)
+
+java_library(
+       name = "LibraryExample",
+       srcs = ["IntMultiplier.java"],
 )
