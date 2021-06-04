@@ -40,8 +40,40 @@ And now, in our project root, we see the bazel generated directories:
 WORKSPACE               bazel-bin               bazel-first_bazel_proj  bazel-out               bazel-testlogs          notes.md                src/
 ```
 
-Creating a single binary is fine, but not practical for development. We want to seperate our programs into finer grain components due to the following advantages:
+Note: Creating a single binary is fine, but not practical for development. We want to seperate our programs into finer grain components due to the following advantages:
 - more shareable
 - easier to test
 - faster to build
 - easier to optimize the build
+
+Now, we create a file `IntMultiplier.java` and attempt to use it within `HelloWorld.java`. 
+When we run:
+```
+bazel run src:HelloWorld
+```
+we get:
+```
+INFO: Analyzed target //src:HelloWorld (0 packages loaded, 0 targets configured).
+INFO: Found 1 target...
+ERROR: /Users/amedrano/playground/first_bazel_proj/src/BUILD.bazel:1:12: Building src/HelloWorld.jar (1 source file) failed: (Exit 1): java failed: error executing command external/remotejdk11_macos/bin/java -XX:+UseParallelOldGC -XX:-CompactStrings '--patch-module=java.compiler=external/remote_java_tools_darwin/java_tools/java_compiler.jar' ... (remaining 15 argument(s) skipped)
+src/HelloWorld.java:4: error: cannot find symbol
+        IntMultiplier im = new IntMultiplier(3, 4);
+        ^
+  symbol:   class IntMultiplier
+  location: class HelloWorld
+src/HelloWorld.java:4: error: cannot find symbol
+        IntMultiplier im = new IntMultiplier(3, 4);
+                               ^
+  symbol:   class IntMultiplier
+  location: class HelloWorld
+Target //src:HelloWorld failed to build
+Use --verbose_failures to see the command lines of failed build steps.
+INFO: Elapsed time: 0.349s, Critical Path: 0.19s
+INFO: 2 processes: 2 internal.
+FAILED: Build did NOT complete successfully
+FAILED: Build did NOT complete successfully
+```
+The error is: 
+```
+error: cannot find symbol IntMultiplier im = new IntMultiplier(3, 4);
+```
