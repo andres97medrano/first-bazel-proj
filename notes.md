@@ -119,3 +119,39 @@ java_binary(
       ]
 )
 ```
+
+And it works!
+
+### Testing Build Targets
+We create a new directory for required test dependencies named `third_party`.
+
+Within its `BUILD` file we do:
+
+```
+package(default_visibility = ["//visibility:public"])
+java_import(
+        name = "junit4",
+        jars = [
+                "hamcrest/hamcrest-core-1.3.jar",
+                "junit/junit-4.13.2.jar",
+       ]
+)
+```
+The `visibility:public` label allows us to expose this test target to all `BUILD` in the project.
+
+Next, we create a `IntMultiplierTest.java` file and write tests. Within the `third_party/BUILD` file, we define the new build target:
+```
+java_test(
+       name = "LibraryExampleTest",
+       srcs = ["IntMultiplierTest.java"],
+       deps = [
+            ":LibraryExample",
+            "//third_party:junit4",
+       ],
+       test_class = "IntMultiplierTest",
+)
+```
+And we can run our tests using:
+```
+bazel test src:LibraryExampleTest
+```

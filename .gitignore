@@ -2,3 +2,4 @@ bazel-bin
 bazel-first_bazel_proj
 bazel-out
 bazel-testlogs
+.DS_Store

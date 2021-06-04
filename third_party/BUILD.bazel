@@ -1,0 +1,10 @@
+# allows the targets within this BUILD file to be visible in other BUILD files
+package(default_visibility = ["//visibility:public"]) 
+
+java_import(
+    name = "junit4",
+    jars = [
+        "hamcrest/hamcrest-core-1.3.jar",
+        "junit/junit-4.13.2.jar",
+    ]
+)
