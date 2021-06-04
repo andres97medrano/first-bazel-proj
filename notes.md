@@ -155,3 +155,12 @@ And we can run our tests using:
 ```
 bazel test src:LibraryExampleTest
 ```
+
+## Takeaways
+With the following rules:
+- java_binary
+- java_library
+- java_import
+- java_test
+
+we were able to create, organize, test, and run a Java program. 

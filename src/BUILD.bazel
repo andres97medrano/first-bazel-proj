@@ -13,6 +13,7 @@ java_library(
        srcs = ["IntMultiplier.java"],
 )
 
+# create a test to verify the behavior of the java_library "LibraryExample"
 java_test(
        name = "LibraryExampleTest",
        srcs = ["IntMultiplierTest.java"],

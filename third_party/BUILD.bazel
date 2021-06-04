@@ -1,6 +1,7 @@
 # allows the targets within this BUILD file to be visible in other BUILD files
 package(default_visibility = ["//visibility:public"]) 
 
+# wraps jar files into a unit that can be depended upon
 java_import(
     name = "junit4",
     jars = [
