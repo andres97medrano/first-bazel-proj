@@ -77,3 +77,20 @@ The error is:
 ```
 error: cannot find symbol IntMultiplier im = new IntMultiplier(3, 4);
 ```
+
+Bazel will not find everything automatically. There is nothing implicit. You have to explicitly specify everything. We can do this in two ways:
+- Add `IntMultiplier` into the list of `srcs` for the build target
+- Create a new library and add the `IntMultiplier` to it. Then make the build target (`java_binary`) depend on it. 
+
+For the first case, we do:
+```
+java_binary(
+      name = "HelloWorld",
+      srcs = [
+           "HelloWorld.java",
+           "IntMultiplier.java",
+      ],
+)
+```
+
+Although this works, it is sub-optimal since `IntMultiplier` can easily be reused in other places. It is locked into the `HelloWorld` binary as of now.

@@ -1,4 +1,7 @@
 java_binary(
       name = "HelloWorld",
-      srcs = ["HelloWorld.java"],
+      srcs = [
+           "HelloWorld.java",
+           "IntMultiplier.java",
+      ],
 )
