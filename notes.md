@@ -5,7 +5,13 @@ Following the O'Reilly tutorial found [here](https://learning.oreilly.com/librar
 ## Add `WORKSPACE` file
 - This file should be placed at the root of the Bazel project
 - All paths specified will be relative to this file
+- Bazel will create new sub-directories in the same location as the `WORKSPACE` directory
 
 The `WORKSPACE` file allows you to:
 - Add remote code from repositories to your workspace
 - Add new rules for compiling in different languages
+
+---
+
+## Add source code
+- Created a `HelloWorld.java` file under `src/` dir
