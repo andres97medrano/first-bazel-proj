@@ -34,3 +34,15 @@ py_binary(
     name="hello_world",
     srcs = ["hello_world.py"],
 )
+
+py_library(
+    name = "library_example",
+    srcs = ["int_multiplier.py"],
+)
+
+py_test(
+    name = "library_example_test",
+    srcs = ["int_multiplier_test.py"],
+    deps = [":library_example"],
+    main = "int_multiplier_test.py",
+)
